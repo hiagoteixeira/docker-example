@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+    server:
+        container_name: class_server
+        build: 
+            context: ../
+            dockerfile: ./docker/build/Dockerfile
+        ports: 
+            - 80:80
+        volumes:
+            - ../:/var/www/html/
+    
+    database:
+        image: mysql:8
+        container_name: class_mysql
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: class
+        ports:
+            - 3306:3306
